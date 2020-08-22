@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "acb092b2-c803-46e9-ad01-c5157d68f6c7",
+		"name": "APITests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "topServices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "171c6e1a-06bf-40ec-854c-aae977fe15f6",
+								"exec": [
+									"var schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+									"    \"type\": \"array\",",
+									"     \"items\":",
+									"     {",
+									"        \"type\": \"object\",",
+									"        \"\":",
+									"        {",
+									"            \"name\": ",
+									"            {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"url\": ",
+									"            {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"clientKey\": ",
+									"            {",
+									"                \"type\": \"string\"",
+									"            },",
+									"            \"isRequired\": ",
+									"            {",
+									"                \"type\": \"boolean\"",
+									"            }",
+									"        },",
+									"        \"required\": ",
+									"        [",
+									"            \"name\",",
+									"            \"url\",",
+									"            \"clientKey\",",
+									"            \"isRequiredLogin\"",
+									"        ]",
+									"    }",
+									"}",
+									"var jsonResponse = pm.response.json();",
+									"pm.test('Schema is valid', function() {",
+									"  pm.expect(tv4.validate(jsonResponse, schema)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/en/services/top",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"en",
+								"services",
+								"top"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allServices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/en/servicegroups/services",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"en",
+								"servicegroups",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
