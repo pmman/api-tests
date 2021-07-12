@@ -33,20 +33,19 @@ jobs:
         run: |
           mkdir -p testResults
           newman run ./APITests.postman_collection.json \
-          -e ./APITest_Dev.postman_environment.json \
+          -e ./environment.json \
           -r junitfull \
           --reporter-junitfull-export testResults/result.xml \
           -n 2 \
       - name: Send message to Slack API
         id: slack
         if: failure() #only send message when test fail
-        uses: rtCamp/action-slack-notify@v2
+        uses: Ilshidur/action-slack@2.0.2
         env:
           SLACK_CHANNEL: U027XFPFPA8
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
-          SLACK_MESSAGE: 'Check out the result https://github.xmedia.ch/Immoscout24/api-tests/actions/runs/${{ github.run_id }}'
-          SLACK_TITLE: Contract test failed
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          args: 'test test'
       - name: Output the run Details
         uses: actions/upload-artifact@v2
         if: always()    # run this step even if previous step failed
