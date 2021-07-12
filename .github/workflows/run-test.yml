@@ -39,7 +39,7 @@ jobs:
           -n 2 \
       - name: Send message to Slack API
         id: slack
-        if: failure() #only send message when test fail
+        if: always() #only send message when test fail
         uses: Ilshidur/action-slack@2.0.2
         env:
           SLACK_CHANNEL: U027XFPFPA8
