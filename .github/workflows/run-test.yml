@@ -25,6 +25,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - name: restart docker
+        run: |
+          sudo ./svc.sh stop
+          sudo ./svc.sh start
       - name: Install newman
         run: npm install -g newman newman-reporter-junitfull
       - name: Run POSTMAN collection
