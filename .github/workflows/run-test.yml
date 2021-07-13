@@ -19,16 +19,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: restart docker
+        run: |
+          sudo ./svc.sh stop
+          sudo ./svc.sh start
       - name: Checkout Repository
         uses: actions/checkout@v2.3.1
       - name: set up node
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: restart docker
-        run: |
-          sudo ./svc.sh stop
-          sudo ./svc.sh start
       - name: Install newman
         run: npm install -g newman newman-reporter-junitfull
       - name: Run POSTMAN collection
